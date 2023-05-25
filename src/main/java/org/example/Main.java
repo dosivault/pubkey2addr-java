@@ -63,9 +63,13 @@ public class Main {
         return Bech32.encode(Bech32.Encoding.BECH32, hrp, base32Binary);
     }
 
-    public static String hexPubKey2address(final String hexCompressedPubKey) {
-        byte[] compressedPublicKey = Hex.decode(hexCompressedPubKey);
-        byte[] addressBytes = compressedPubKeyToAddrBytes(compressedPublicKey);
+    public static String pubKey2address(final byte[] compressedPubKey) {
+        byte[] addressBytes = compressedPubKeyToAddrBytes(compressedPubKey);
         return toBech32("link", addressBytes);
+    }
+
+    public static String hexPubKey2address(final String hexCompressedPubKey) {
+        byte[] compressedPubKey = Hex.decode(hexCompressedPubKey);
+        return pubKey2address(compressedPubKey);
     }
 }
